@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>یراق آلات</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>یراق آلات</h1>
+
+<div id="hardwareList"></div>
+
+</div>
+
+
+<script>
+
+const items = [
+
+"لولا ساده",
+"لولا آرام بند",
+"لولا ۱۸۰ درجه",
+"لولا خلاص",
+
+"جک ۸۰ نیوتون ساده",
+"جک ۱۰۰ نیوتون ساده",
+"جک ۱۲۰ نیوتون ساده",
+"جک ۱۰۰ نیوتون آرام بند",
+"جک ۱۲۰ نیوتون آرام بند",
+
+"نبشی ساده بزرگ",
+"نبشی چهار پیچ",
+"نبشی قاب دار",
+"نبشی پلاستیکی",
+"نبشی ساده کوچک",
+
+"پولکی",
+"بتونه",
+"چسب ۱۲۳",
+"چسب آکواریوم",
+"چسب درزگیر",
+
+"پیم طبقه",
+
+"پایه ۱۴",
+"پایه ۱۳",
+"پایه ۱۲",
+"پایه ۱۰",
+"پایه ۸",
+"پایه ۶",
+"پایه ۵",
+"پایه تخم مرغی",
+
+"پاشنه"
+
+];
+
+
+let html = "";
+
+items.forEach((item,index)=>{
+
+html += `
+
+<div>
+
+<label>${item}</label>
+
+<select id="item${index}">
+
+${createOptions()}
+
+</select>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("hardwareList").innerHTML = html;
+
+
+
+function createOptions(){
+
+let options = `<option value="0">0</option>`;
+
+for(let i=1;i<=300;i++){
+
+options += `<option value="${i}">${i}</option>`;
+
+}
+
+return options;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
