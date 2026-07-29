@@ -4,18 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>محاسبه قیمت کابینت</title>
+
+<title>محاسبه کابینت</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
-<script src="script.js"></script>
+
 <body>
 
 <div class="container">
 
-<h1>محاسبه قیمت کابینت</h1>
+<h1>محاسبه کابینت</h1>
 
-<label>قیمت هر متر کابینت کامل (تومان)</label>
-<input id="price" type="number">
+<label>قیمت یک متر کابینت کامل</label>
+<input id="price" type="number" placeholder="مثلا 35000000">
+
+
+<label>واحد پول</label>
+<select id="unit">
+<option value="تومان">تومان</option>
+<option value="ریال">ریال</option>
+</select>
 
 
 <label>متراژ کابینت پایین</label>
@@ -28,51 +38,27 @@
 
 <label>ارتفاع باکس بالا</label>
 <select id="height">
+
 <option value="70">70 سانت</option>
 <option value="90">90 سانت</option>
 <option value="100">100 سانت</option>
 <option value="110">110 سانت</option>
 <option value="120">120 سانت</option>
+
 </select>
-
-
-<label>متراژ کابینت سرپایی</label>
-<input id="tall" type="number">
 
 
 <button onclick="calculate()">محاسبه قیمت</button>
 
+
 <div id="result"></div>
 
-</div>
-
-</body>
-
-<div class="container">
-
-<h1>محاسبه قیمت کابینت</h1>
-
-<label>قیمت هر متر کابینت کامل</label>
-<input type="number" placeholder="تومان">
-
-<label>متراژ کابینت پایین</label>
-<input type="number" placeholder="متر">
-
-<label>متراژ کابینت بالا</label>
-<input type="number" placeholder="متر">
-
-<label>ارتفاع باکس بالا</label>
-<select>
-<option>70 سانت</option>
-<option>90 سانت</option>
-<option>100 سانت</option>
-<option>110 سانت</option>
-<option>120 سانت</option>
-</select>
-
-<button>محاسبه</button>
 
 </div>
 
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
