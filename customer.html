@@ -36,7 +36,7 @@
 <input id="deposit" type="number" placeholder="مثلا 100000000">
 
 
-<button onclick="createOrder()">
+<button onclick="saveOrder()">
 ثبت سفارش
 </button>
 
@@ -55,43 +55,118 @@
 
 <script>
 
+
 let orderText = "";
 
-
-function createOrder(){
-
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-
-let total = Number(document.getElementById("total").value);
-let deposit = Number(document.getElementById("deposit").value);
-
-let remain = total - deposit;
+let editIndex = null;
 
 
-let order = {
 
-name: name,
-phone: phone,
-total: total,
-deposit: deposit,
-remain: remain,
-date: new Date().toLocaleDateString("fa-IR")
-
-};
+window.onload = function(){
 
 
-// دریافت سفارش‌های قبلی
+let edit = localStorage.getItem("editOrder");
+
+
+if(edit !== null){
+
+
+editIndex = Number(edit);
+
 
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 
-// اضافه کردن سفارش جدید
+let order = orders[editIndex];
+
+
+if(order){
+
+
+document.getElementById("name").value = order.name;
+
+document.getElementById("phone").value = order.phone;
+
+document.getElementById("total").value = order.total;
+
+document.getElementById("deposit").value = order.deposit;
+
+
+}
+
+
+localStorage.removeItem("editOrder");
+
+
+}
+
+
+}
+
+
+
+
+function saveOrder(){
+
+
+let name = document.getElementById("name").value;
+
+let phone = document.getElementById("phone").value;
+
+let total = Number(document.getElementById("total").value);
+
+let deposit = Number(document.getElementById("deposit").value);
+
+
+let remain = total - deposit;
+
+
+
+let order = {
+
+
+name:name,
+
+phone:phone,
+
+total:total,
+
+deposit:deposit,
+
+remain:remain,
+
+date:new Date().toLocaleDateString("fa-IR")
+
+
+};
+
+
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+
+
+if(editIndex !== null){
+
+
+orders[editIndex] = order;
+
+
+alert("سفارش ویرایش شد");
+
+
+}else{
+
 
 orders.push(order);
 
 
-// ذخیره داخل گوشی
+alert("سفارش جدید ذخیره شد");
+
+
+}
+
+
 
 localStorage.setItem("orders", JSON.stringify(orders));
 
@@ -105,19 +180,13 @@ orderText = `
 
 📞 شماره تماس: ${phone}
 
-📅 تاریخ:
-${order.date}
-
-
-💰 مبلغ کل قرارداد:
+💰 مبلغ کل:
 ${total.toLocaleString()} تومان
 
-
-💵 مبلغ بیعانه:
+💵 بیعانه:
 ${deposit.toLocaleString()} تومان
 
-
-💳 مبلغ باقی مانده:
+💳 مانده:
 ${remain.toLocaleString()} تومان
 
 `;
@@ -127,20 +196,23 @@ ${remain.toLocaleString()} تومان
 document.getElementById("result").innerText = orderText;
 
 
-alert("سفارش ذخیره شد");
-
-
 }
+
+
 
 
 
 function copyOrder(){
 
+
 navigator.clipboard.writeText(orderText);
+
 
 alert("اطلاعات سفارش کپی شد");
 
+
 }
+
 
 
 </script>
