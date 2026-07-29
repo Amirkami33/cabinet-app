@@ -4,30 +4,52 @@ let price = Number(document.getElementById("price").value);
 let lower = Number(document.getElementById("lower").value);
 let upper = Number(document.getElementById("upper").value);
 let height = Number(document.getElementById("height").value);
-let tall = Number(document.getElementById("tall").value);
+let unit = document.getElementById("unit").value;
 
 
-// قیمت کابینت پایین (۶۰ درصد)
-let lowerPrice = lower * (price * 0.6);
+// سهم کابینت پایین (۶۰ درصد)
+let lowerMeter = price * 0.6;
 
 
-// قیمت کابینت بالا (۴۰ درصد)
-let upperPrice = upper * (price * 0.4);
+// سهم کابینت بالا (۴۰ درصد)
+let upperMeter = price * 0.4;
 
 
-// افزایش ارتفاع باکس بالا
+// محاسبه قیمت پایین
+let lowerTotal = lower * lowerMeter;
+
+
+// محاسبه قیمت بالا
+let upperTotal = upper * upperMeter;
+
+
+// افزایش ارتفاع فقط برای کابینت بالا
 if (height > 90) {
-    let extra = (height - 90) / 10;
-    upperPrice = upperPrice + (upperPrice * extra * 0.1);
+
+    let extraPercent = ((height - 90) / 10) * 10;
+
+    upperTotal = upperTotal + (upperTotal * extraPercent / 100);
+
 }
 
 
-// جمع کل
-let total = lowerPrice + upperPrice;
+// قیمت نهایی
+let total = lowerTotal + upperTotal;
 
 
 // نمایش نتیجه
-document.getElementById("result").innerHTML =
-"قیمت تقریبی: " + total.toLocaleString() + " تومان";
+document.getElementById("result").innerHTML = `
+
+<h3>نتیجه محاسبه:</h3>
+
+<p>کابینت پایین: ${lowerTotal.toLocaleString()} ${unit}</p>
+
+<p>کابینت بالا: ${upperTotal.toLocaleString()} ${unit}</p>
+
+<hr>
+
+<h2>جمع کل: ${total.toLocaleString()} ${unit}</h2>
+
+`;
 
 }
