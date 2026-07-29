@@ -41,6 +41,7 @@ oninput="searchOrders()">
 let allOrders = [];
 
 
+
 function loadOrders(){
 
 
@@ -63,6 +64,7 @@ let box = document.getElementById("ordersList");
 box.innerHTML = "";
 
 
+
 if(orders.length === 0){
 
 box.innerHTML = "<p>سفارشی پیدا نشد.</p>";
@@ -76,8 +78,8 @@ return;
 orders.forEach(function(order,index){
 
 
-box.innerHTML += `
 
+box.innerHTML += `
 
 <div class="order-box">
 
@@ -111,6 +113,14 @@ ${order.remain.toLocaleString()} تومان
 
 
 
+<button onclick="editOrder(${index})">
+
+✏️ ویرایش
+
+</button>
+
+
+
 <button onclick="deleteOrder(${index})">
 
 🗑 حذف سفارش
@@ -125,7 +135,6 @@ ${order.remain.toLocaleString()} تومان
 
 
 `;
-
 
 });
 
@@ -159,6 +168,21 @@ showOrders(filtered);
 
 
 
+function editOrder(index){
+
+
+localStorage.setItem("editOrder", index);
+
+
+window.location.href = "customer.html";
+
+
+}
+
+
+
+
+
 function deleteOrder(index){
 
 
@@ -166,6 +190,7 @@ let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 
 orders.splice(index,1);
+
 
 
 localStorage.setItem("orders", JSON.stringify(orders));
