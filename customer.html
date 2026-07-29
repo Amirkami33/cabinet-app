@@ -60,17 +60,41 @@ let orderText = "";
 
 function createOrder(){
 
-
 let name = document.getElementById("name").value;
-
 let phone = document.getElementById("phone").value;
 
 let total = Number(document.getElementById("total").value);
-
 let deposit = Number(document.getElementById("deposit").value);
 
-
 let remain = total - deposit;
+
+
+let order = {
+
+name: name,
+phone: phone,
+total: total,
+deposit: deposit,
+remain: remain,
+date: new Date().toLocaleDateString("fa-IR")
+
+};
+
+
+// دریافت سفارش‌های قبلی
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+
+// اضافه کردن سفارش جدید
+
+orders.push(order);
+
+
+// ذخیره داخل گوشی
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
 
 
 orderText = `
@@ -80,6 +104,9 @@ orderText = `
 👤 نام مشتری: ${name}
 
 📞 شماره تماس: ${phone}
+
+📅 تاریخ:
+${order.date}
 
 
 💰 مبلغ کل قرارداد:
@@ -96,7 +123,11 @@ ${remain.toLocaleString()} تومان
 `;
 
 
+
 document.getElementById("result").innerText = orderText;
+
+
+alert("سفارش ذخیره شد");
 
 
 }
