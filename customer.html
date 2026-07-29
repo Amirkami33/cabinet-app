@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ثبت سفارش مشتری</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>📋 ثبت سفارش مشتری</h1>
+
+
+<label>نام مشتری</label>
+<input id="name" type="text" placeholder="نام مشتری">
+
+
+<label>شماره تماس</label>
+<input id="phone" type="number" placeholder="شماره تماس">
+
+
+<label>مبلغ کل قرارداد</label>
+<input id="total" type="number" placeholder="مثلا 350000000">
+
+
+<label>مبلغ بیعانه</label>
+<input id="deposit" type="number" placeholder="مثلا 100000000">
+
+
+<button onclick="createOrder()">
+ثبت سفارش
+</button>
+
+
+<button onclick="copyOrder()">
+کپی اطلاعات سفارش
+</button>
+
+
+<div id="result"></div>
+
+
+</div>
+
+
+
+<script>
+
+let orderText = "";
+
+
+function createOrder(){
+
+
+let name = document.getElementById("name").value;
+
+let phone = document.getElementById("phone").value;
+
+let total = Number(document.getElementById("total").value);
+
+let deposit = Number(document.getElementById("deposit").value);
+
+
+let remain = total - deposit;
+
+
+orderText = `
+
+📋 سفارش کابینت
+
+👤 نام مشتری: ${name}
+
+📞 شماره تماس: ${phone}
+
+
+💰 مبلغ کل قرارداد:
+${total.toLocaleString()} تومان
+
+
+💵 مبلغ بیعانه:
+${deposit.toLocaleString()} تومان
+
+
+💳 مبلغ باقی مانده:
+${remain.toLocaleString()} تومان
+
+`;
+
+
+document.getElementById("result").innerText = orderText;
+
+
+}
+
+
+
+function copyOrder(){
+
+navigator.clipboard.writeText(orderText);
+
+alert("اطلاعات سفارش کپی شد");
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
