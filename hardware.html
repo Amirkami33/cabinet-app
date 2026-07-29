@@ -10,7 +10,53 @@
 <link rel="stylesheet" href="style.css">
 
 </head>
+<button onclick="createInvoice()">
+ساخت فاکتور
+</button>
 
+<button onclick="copyInvoice()">
+کپی فاکتور
+</button>
+
+<div id="invoice"></div>
+
+
+<script>
+
+function createInvoice(){
+
+let invoice = "فاکتور یراق آلات:\n\n";
+
+
+items.forEach((item,index)=>{
+
+let count = document.getElementById("item"+index).value;
+
+if(count > 0){
+
+invoice += item + " : " + count + " عدد\n";
+
+}
+
+});
+
+
+document.getElementById("invoice").innerText = invoice;
+
+}
+
+
+function copyInvoice(){
+
+let text = document.getElementById("invoice").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("فاکتور کپی شد");
+
+}
+
+</script>
 <body>
 
 <div class="container">
