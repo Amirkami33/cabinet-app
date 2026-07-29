@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>سفارش‌های من</title>
+<title>سفارش‌های ثبت شده</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -34,8 +34,10 @@ function loadOrders(){
 
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-
 let box = document.getElementById("ordersList");
+
+
+box.innerHTML = "";
 
 
 if(orders.length === 0){
@@ -57,21 +59,31 @@ box.innerHTML += `
 
 <h3>👤 ${order.name}</h3>
 
-<p>📞 ${order.phone}</p>
+<p>📞 شماره تماس: ${order.phone}</p>
 
 <p>📅 تاریخ: ${order.date}</p>
+
 
 <p>💰 مبلغ کل:
 ${order.total.toLocaleString()} تومان
 </p>
 
+
 <p>💵 بیعانه:
 ${order.deposit.toLocaleString()} تومان
 </p>
 
+
 <p>💳 مانده:
 ${order.remain.toLocaleString()} تومان
 </p>
+
+
+<button onclick="deleteOrder(${index})">
+
+🗑 حذف سفارش
+
+</button>
 
 
 </div>
@@ -81,6 +93,28 @@ ${order.remain.toLocaleString()} تومان
 `;
 
 });
+
+
+}
+
+
+
+function deleteOrder(index){
+
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+
+orders.splice(index,1);
+
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+
+alert("سفارش حذف شد");
+
+
+loadOrders();
 
 
 }
