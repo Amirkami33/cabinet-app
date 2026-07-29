@@ -1,4 +1,4 @@
-function calculate() {
+function calculate(){
 
 let price = Number(document.getElementById("price").value);
 let lower = Number(document.getElementById("lower").value);
@@ -7,40 +7,42 @@ let height = Number(document.getElementById("height").value);
 let unit = document.getElementById("unit").value;
 
 
-// سهم کابینت پایین (۶۰ درصد)
+if(!price || !lower || !upper){
+    document.getElementById("result").innerHTML =
+    "لطفا همه اطلاعات را وارد کنید";
+    return;
+}
+
+
+// سهم هر بخش از قیمت یک متر
 let lowerMeter = price * 0.6;
-
-
-// سهم کابینت بالا (۴۰ درصد)
 let upperMeter = price * 0.4;
 
 
-// محاسبه قیمت پایین
+// قیمت پایین
 let lowerTotal = lower * lowerMeter;
 
 
-// محاسبه قیمت بالا
+// قیمت بالا
 let upperTotal = upper * upperMeter;
 
 
 // افزایش ارتفاع فقط برای کابینت بالا
-if (height > 90) {
+if(height > 90){
 
-    let extraPercent = ((height - 90) / 10) * 10;
+    let extraSteps = (height - 90) / 10;
 
-    upperTotal = upperTotal + (upperTotal * extraPercent / 100);
+    upperTotal = upperTotal + (upperTotal * extraSteps * 0.1);
 
 }
 
 
-// قیمت نهایی
 let total = lowerTotal + upperTotal;
 
 
-// نمایش نتیجه
 document.getElementById("result").innerHTML = `
 
-<h3>نتیجه محاسبه:</h3>
+<h3>نتیجه:</h3>
 
 <p>کابینت پایین: ${lowerTotal.toLocaleString()} ${unit}</p>
 
