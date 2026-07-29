@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>سفارش‌های من</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>📋 سفارش‌های ثبت شده</h1>
+
+<div id="ordersList"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+function loadOrders(){
+
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+
+let box = document.getElementById("ordersList");
+
+
+if(orders.length === 0){
+
+box.innerHTML = "<p>هنوز سفارشی ثبت نشده است.</p>";
+
+return;
+
+}
+
+
+
+orders.forEach(function(order,index){
+
+
+box.innerHTML += `
+
+<div class="order-box">
+
+<h3>👤 ${order.name}</h3>
+
+<p>📞 ${order.phone}</p>
+
+<p>📅 تاریخ: ${order.date}</p>
+
+<p>💰 مبلغ کل:
+${order.total.toLocaleString()} تومان
+</p>
+
+<p>💵 بیعانه:
+${order.deposit.toLocaleString()} تومان
+</p>
+
+<p>💳 مانده:
+${order.remain.toLocaleString()} تومان
+</p>
+
+
+</div>
+
+<hr>
+
+`;
+
+});
+
+
+}
+
+
+
+loadOrders();
+
+
+</script>
+
+
+</body>
+
+</html>
