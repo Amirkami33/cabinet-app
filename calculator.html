@@ -17,7 +17,8 @@
 
 <h1>محاسبه کابینت</h1>
 
-<label>قیمت یک متر کابینت کامل</label>
+
+<label>قیمت یک متر کابینت کامل (بالا + پایین)</label>
 <input id="price" type="number" placeholder="مثلا 35000000">
 
 
@@ -29,11 +30,11 @@
 
 
 <label>متراژ کابینت پایین</label>
-<input id="lower" type="number">
+<input id="lower" type="number" placeholder="مثلا 5">
 
 
 <label>متراژ کابینت بالا</label>
-<input id="upper" type="number">
+<input id="upper" type="number" placeholder="مثلا 4">
 
 
 <label>ارتفاع باکس بالا</label>
@@ -48,7 +49,9 @@
 </select>
 
 
-<button onclick="calculate()">محاسبه قیمت</button>
+<button id="calcBtn">
+محاسبه قیمت
+</button>
 
 
 <div id="result"></div>
@@ -58,9 +61,19 @@
 
 
 <script src="script.js"></script>
+
+
 <script>
-alert("اتصال کد درست است");
+
+document.getElementById("calcBtn").addEventListener("click", function(){
+
+calculate();
+
+});
+
 </script>
+
+
 </body>
 
 </html>
