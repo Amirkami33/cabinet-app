@@ -31,3 +31,20 @@ button {
     border-radius: 12px;
     font-size: 18px;
 }
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.menu button {
+    background: white;
+    color: #222;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 18px;
+    font-size: 17px;
+    text-align: right;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
