@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تماس با ما</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>تماس با ما</h1>
+
+<h2>مهندس امیر پورشیخ</h2>
+
+<p id="phone">
+09023693866
+</p>
+
+<button onclick="copyPhone()">
+کپی شماره تماس
+</button>
+
+<div id="message"></div>
+
+</div>
+
+
+<script>
+
+function copyPhone(){
+
+let phone = "09023693866";
+
+navigator.clipboard.writeText(phone);
+
+document.getElementById("message").innerHTML =
+"شماره کپی شد";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
