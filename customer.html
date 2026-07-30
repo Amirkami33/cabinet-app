@@ -9,13 +9,16 @@
 <title>ثبت سفارش مشتری</title>
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cutmaster.css">
 
 </head>
 
 
 <body>
 
+
 <div class="container">
+
 
 <h1>📋 ثبت سفارش مشتری</h1>
 
@@ -25,7 +28,7 @@
 
 
 <label>شماره تماس</label>
-<input id="phone" type="number" placeholder="شماره تماس">
+<input id="phone" type="text" placeholder="شماره تماس">
 
 
 <label>مبلغ کل قرارداد</label>
@@ -109,13 +112,34 @@ localStorage.removeItem("editOrder");
 function saveOrder(){
 
 
-let name = document.getElementById("name").value;
+let name = document.getElementById("name").value.trim();
 
-let phone = document.getElementById("phone").value;
+let phone = document.getElementById("phone").value.trim();
 
 let total = Number(document.getElementById("total").value);
 
 let deposit = Number(document.getElementById("deposit").value);
+
+
+
+if(name === "" || phone === "" || total === 0){
+
+alert("لطفا اطلاعات سفارش را کامل کنید");
+
+return;
+
+}
+
+
+
+if(deposit > total){
+
+alert("مبلغ بیعانه نمی‌تواند بیشتر از مبلغ کل باشد");
+
+return;
+
+}
+
 
 
 let remain = total - deposit;
@@ -142,6 +166,7 @@ date:new Date().toLocaleDateString("fa-IR")
 
 
 
+
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 
@@ -152,7 +177,7 @@ if(editIndex !== null){
 orders[editIndex] = order;
 
 
-alert("سفارش ویرایش شد");
+alert("✅ سفارش ویرایش شد");
 
 
 }else{
@@ -161,7 +186,7 @@ alert("سفارش ویرایش شد");
 orders.push(order);
 
 
-alert("سفارش جدید ذخیره شد");
+alert("✅ سفارش جدید ذخیره شد");
 
 
 }
@@ -172,28 +197,52 @@ localStorage.setItem("orders", JSON.stringify(orders));
 
 
 
+
+
 orderText = `
 
 📋 سفارش کابینت
 
-👤 نام مشتری: ${name}
+👤 نام مشتری:
+${name}
 
-📞 شماره تماس: ${phone}
 
-💰 مبلغ کل:
+📞 شماره تماس:
+${phone}
+
+
+💰 مبلغ کل قرارداد:
 ${total.toLocaleString()} تومان
 
-💵 بیعانه:
+
+💵 مبلغ بیعانه:
 ${deposit.toLocaleString()} تومان
 
-💳 مانده:
+
+💳 مانده حساب:
 ${remain.toLocaleString()} تومان
+
+
+📅 تاریخ:
+${order.date}
 
 `;
 
 
 
 document.getElementById("result").innerText = orderText;
+
+
+
+// پاک کردن فرم
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("total").value="";
+document.getElementById("deposit").value="";
+
+
+editIndex = null;
 
 
 }
@@ -205,10 +254,19 @@ document.getElementById("result").innerText = orderText;
 function copyOrder(){
 
 
+if(orderText === ""){
+
+alert("ابتدا سفارش را ثبت کنید");
+
+return;
+
+}
+
+
 navigator.clipboard.writeText(orderText);
 
 
-alert("اطلاعات سفارش کپی شد");
+alert("📋 اطلاعات سفارش کپی شد");
 
 
 }
@@ -216,6 +274,7 @@ alert("اطلاعات سفارش کپی شد");
 
 
 </script>
+
 
 
 </body>
